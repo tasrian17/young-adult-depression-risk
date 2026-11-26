@@ -31,8 +31,31 @@ You confirmed this. It includes both blood pressure files (`BPX` to 2015-2016, `
 **D9. Literature: cite only what was opened; mark abstract-only sources.**
 You confirmed this. Each reference in `reports/related_work.md` is marked "[full text]" or "[abstract only]".
 
-**D10. The arXiv review 2508.09809 is not cited.**
-CLAUDE.md lists it as a starting point, and I read its abstract. It is a preprint, and your working rules say to cite only peer-reviewed papers or official reports, so I left it out. It is listed as an open question in the Checkpoint 1 summary.
+**D10. The arXiv review 2508.09809 is cited as a preprint, for background only.**
+At first I left it out, because the working rules allow only peer-reviewed papers or official reports. After review you decided to cite it, clearly labelled as a preprint and used for background only, never for a key claim. Preprints are labelled "preprint, not peer reviewed" in the reference list.
 
 **D11. Papers that could not be opened are not cited.**
-ScienceDirect refused automated access (HTTP 403), and I did not try to get around that. The IBRO paper is open access and has a full-text record in Europe PMC (PMC13563247), the public archive run by EMBL-EBI. I read it there. Please tell me if you would rather I treat the publisher page as the only acceptable source. A 2024 *Innovation in Aging* conference abstract and Tubbs et al. 2020 appeared in searches, but I could not read the relevant text, so they are not cited.
+ScienceDirect refused automated access (HTTP 403), and I did not try to get around that. The IBRO paper is open access and has a full-text record in Europe PMC (PMC13563247), the public archive run by EMBL-EBI. I read it there. You confirmed that Europe PMC is an acceptable source for open-access versions.
+
+### Decisions made at the Checkpoint 1 review
+
+**D12. Aim 2 is framed as an outcome-side ablation, with named comparisons.**
+The literature showed that parts of Aim 2 exist already: removing sleep predictors (Salimi et al. 2026) and removing item 3 from the outcome in a small convenience sample (Al-Ghadban and Salman 2026). You decided to keep Aim 2 as follows: remove both the sleep (`DPQ030`) and tiredness (`DPQ040`) items from the outcome, for both regression and prediction, in young adults, with survey weights. Both papers are named comparisons. Alternative: drop or narrow Aim 2. We rejected that because neither paper removes both items, uses a national sample of young adults, or applies the ablation to predictive models.
+
+**D13. Malik and En (preprint, 2026) added as a comparison for Aim 2.**
+You asked me to check it. It overlaps partly. It uses survey-weighted NHANES 2007-2018, treats "reported trouble sleeping" as "measured independently of the PHQ-9" (OR 4.03), and re-tests the sleep domain against an outcome it calls "PHQ-8, which removes the sleep item". That conflicts with the standard PHQ-8, which drops item 9. Its methods do not say which item was removed, and the result is given without numbers. It does not remove tiredness, does not study young adults, and does not cover 2021-2023. It is in `related_work.md` section 3 as a preprint comparison.
+
+**D14. 2021-2023 comparisons will be described as mixing real change with the interview mode change.**
+To be written into `docs/analysis_plan.md` at Checkpoint 3, as you decided. The depression questions moved from an interviewer (CAPI) to self-administered ACASI. NCHS documents the change (Vital and Health Statistics Series 1, No. 66, and the DPQ_L codebook) but has published no analysis of its effect on PHQ-9 scores that I could find. Response rates also fell, from 51.0% and 46.9% (interview and examination, 2017-March 2020) to 34.6% and 25.7% (NHANES 2021-2023 brief overview). The plan will state both points. Alternative: adjust for mode. That isn't possible, because mode and period are perfectly confounded: everyone in 2021-2023 used ACASI and nobody before did.
+
+**D15. The antidepressant ablation uses 2005-2016 and 2017-March 2020 only.**
+Why: the 2021-2023 medication file has no drug names. CDC states that "the detailed prescription medication name, duration of use, and reason for use were not collected in this survey cycle." Secondary ablations belong on development data anyway, so the locked test set is not touched. To be stated in `analysis_plan.md`.
+
+**D16. Optional sensitivity check: also remove the appetite item.**
+Factor analyses, including one in NHANES, place appetite (item 5, `DPQ050`) in the somatic factor with sleep and tiredness. A pre-registered optional check will drop items 3, 4 and 5 together, on top of the main two-item ablation, not instead of it.
+
+**D17. Aim 4 and CLAUDE.md stay unchanged until the Kaggle page is checked.**
+A peer-reviewed paper describes the Kaggle dataset as synthetic, but I could not confirm this on Kaggle itself. You will check the page. Until then, nothing in CLAUDE.md or Aim 4 changes.
+
+**D18. The planning file is not a project file.**
+`you-are-working-on-humming-bee.md` is Claude's own working plan, stored outside the repository (`/root/.claude/plans/`). It was never committed, so there was nothing to remove. A 2024 *Innovation in Aging* conference abstract and Tubbs et al. 2020 appeared in searches, but I could not read the relevant text, so they are not cited.
