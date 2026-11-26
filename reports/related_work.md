@@ -54,10 +54,13 @@ This work asks a measurement question: do somatic items measure depression, phys
 ## 5. Kaggle and convenience data checked against validated data (search b)
 
 I found no study that tests findings from a Kaggle mental health dataset against validated survey data. Related work:
-- **Kaggle provenance.** Gibson et al. audited two widely used Kaggle datasets on stroke and diabetes. Neither could be verified as authentic, yet 125 published prediction models were built on them [18].
+- **Kaggle provenance, and the precedent for our paper audit.** Gibson et al. audited two widely used Kaggle datasets on stroke and diabetes [18]. They searched Google Scholar (on 15 August 2025) using identifying terms from the datasets' Kaggle web addresses. They did not use PubMed because those terms retrieved nothing relevant there. They checked full texts to confirm each paper used the dataset, and kept only peer-reviewed prediction model studies (no preprints, conference abstracts or theses). Of 653 search results, 125 studies were included and assessed against nine TRIPOD+AI checklist items. Neither dataset could be verified as authentic [18]. This is the closest methodological precedent for the bounded paper audit in Aim 4. Ours differs in three ways:
+  1. It is about mental health data.
+  2. Its dataset is openly labelled synthetic, so the question is whether papers acknowledge that, not whether the data are authentic.
+  3. It sits beside a direct comparison of the dataset's patterns with validated national data. It also counts preprints, labelled as such, which Gibson et al. excluded.
 - **Clinical mental health datasets.** As background only, a review posted as a preprint describes them as scattered, under-documented and often inaccessible [19].
 - **Convenience versus representative samples.** An online convenience sample of older adults reported better mental health than a representative sample. It also lacked the representative sample's rise in depression with age [20].
-- **The course project's own dataset.** Washton et al. describe the Kaggle Student Depression Dataset (27,901 records) as synthetic. They say its depression label "was generated algorithmically based on weighted combinations of the predictor variables", and that the data "do not originate from any real-world location, population, or data collection effort" [21]. Their only source for this is the Kaggle page. I could not open that page from this environment, so this is not yet confirmed. If it is correct, the original project's feature rankings describe how the data were generated, not real students.
+- **The course project's own dataset is labelled synthetic.** Washton et al. describe the Kaggle Student Depression Dataset (27,901 records) as synthetic. They say its depression label "was generated algorithmically based on weighted combinations of the predictor variables" [21]. The Kaggle page confirms the synthetic label directly. It states: "This dataset was synthetically generated and may not reflect real-world data." It carries a "Synthetic" tag and gives no original data source [22]. The page gives no details of how the data were generated, so the statement about the label's construction rests on Washton et al. alone. Either way, patterns in this dataset are not evidence about real students. Aim 4 asks which of them happen to match validated data.
 
 ## 6. Where this project fits
 
@@ -65,7 +68,7 @@ This project adds four things that earlier work does not cover:
 1. design-based estimates for 18 to 25 year olds in NHANES;
 2. an outcome-side sleep ablation (dropping `DPQ030` and `DPQ040`), applied to both regression and prediction;
 3. a three-period comparison that states plainly that 2021-2023 differences mix real change with the change in interview mode and lower response;
-4. a test of whether findings from an undocumented, possibly synthetic, dataset hold up in validated data.
+4. a test of whether findings from a dataset labelled synthetic hold up in validated data, with a count of published papers that use it and whether they say it is synthetic.
 
 ## References
 
@@ -86,7 +89,8 @@ This project adds four things that earlier work does not cover:
 15. Elhai JD, Contractor AA, Tamburrino M, et al. The factor structure of major depression symptoms: a test of four competing models using the Patient Health Questionnaire-9. *Psychiatry Res*. 2012;199(3):169-173. doi:10.1016/j.psychres.2012.05.018 [abstract only]
 16. Srisurapanont M, Suradom C, Maneeton N, Oon-Arom A, Maneeton B. Depressive symptom profiles across pregnant, postpartum, and nonperipartum women: measurement invariance and differential item functioning analyses of 2005-2021 NHANES data. *BMC Public Health*. 2026;26:2523. doi:10.1186/s12889-026-28575-8 [abstract only]
 17. de Jonge P, Ormel J, van den Brink RH, et al. Symptom dimensions of depression following myocardial infarction and their relationship with somatic health status and cardiovascular prognosis. *Am J Psychiatry*. 2006;163(1):138-144. doi:10.1176/appi.ajp.163.1.138 [abstract only]
-18. Gibson AD, White NM, Collins GS, Barnett AG. Evidence of unreliable data and poor data provenance in clinical prediction model research and clinical practice. *BMC Med*. 2026;24:386. doi:10.1186/s12916-026-04981-y [abstract only]
+18. Gibson AD, White NM, Collins GS, Barnett AG. Evidence of unreliable data and poor data provenance in clinical prediction model research and clinical practice. *BMC Med*. 2026;24:386. doi:10.1186/s12916-026-04981-y [full text]
 19. Mandal A, Adhikary PK, Arnaout H, Gurevych I, Chakraborty T. A comprehensive review of datasets for clinical mental health AI systems. arXiv:2508.09809v2. 2025. https://arxiv.org/abs/2508.09809 [abstract only; preprint, not peer reviewed; background only]
 20. Georgi H, Dragomirecká E, Tichá Z, Mana J. Depression and anxiety in older adults: a comparison between online convenience and conventional representative sampling. *Depress Anxiety*. 2025;2025:2522358. doi:10.1155/da/2522358 [abstract only]
 21. Washton J, Owens T, Sierra A, Toma M. Identifying predictors of student depression through validated machine learning pipelines. *Front Med*. 2026;13:1864665. doi:10.3389/fmed.2026.1864665 [full text, data section]
+22. Opeyemi S. Student Depression Dataset. Kaggle. Apache License 2.0. https://www.kaggle.com/datasets/hopesb/student-depression-dataset (accessed 26 November 2026; read in a browser by the project author, because the page returned no content to automated requests from this environment) [full text]

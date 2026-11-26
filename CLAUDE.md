@@ -21,14 +21,14 @@ Five aims (Aims 1 to 4 use NHANES; Aim 5 is a second stage):
 1. **Risk factors in real data.** Which factors (sleep, income, physical activity, smoking, alcohol, BMI, chronic conditions, insurance, and others) are associated with a positive depression screen in 18 to 25 year olds? How do they differ from older adults?
 2. **The sleep question.** Sleep is often reported as a top predictor of depression. But the PHQ-9 itself asks about sleep (DPQ030) and tiredness (DPQ040). How much of sleep's apparent importance is the outcome partly measuring itself?
 3. **Change over time.** Have the risk factors for young adults changed across 2005-2016, 2017-March 2020 and Aug 2021-Aug 2023? Frame this as "has the picture changed recently," not "what COVID did." The data is cross-sectional and cannot show causes.
-4. **Replication of the original project.** Which findings from my course project hold up in validated data, which are weaker, and which can't be tested?
+4. **Synthetic data versus validated data.** A dataset labelled synthetic is widely used in depression research. Which of the patterns it shows match validated national data? This covers the findings of my course project, which used this dataset. Each comparison is synthetic data versus real survey data, not two samples of people. The results go into a replication scorecard (7.8), alongside a bounded audit of published papers that use the dataset.
 5. **Canadian replication.** Do the main findings (Aims 1 and 2) hold up in Canadian data from the Canadian Community Health Survey (CCHS)? Report Atlantic Canada separately only if the sample allows. Start this only after the NHANES main analysis (Checkpoint 6) is done.
 
 ## 3. What the original project claimed
 
 Source: `original_course_project/final/TasrianAhmed_Project_Report.pdf` and the notebook next to it.
 
-- Dataset: Kaggle "Student Depression Dataset," 27,901 rows, 18 columns.
+- Dataset: Kaggle "Student Depression Dataset," 27,901 rows, 18 columns, by Shodolamu Opeyemi, Apache 2.0 licence. Its Kaggle page states: "This dataset was synthetically generated and may not reflect real-world data." The page carries a "Synthetic" tag and gives no original data source. The course project treated the data as real student records and did not account for this.
 - Target: "high risk" = `Depression == 1` OR `Have you ever had suicidal thoughts? == Yes`. 71.8% positive.
 - Features: Age, Academic Pressure, Work Pressure, CGPA, Study Satisfaction, Job Satisfaction, Work/Study Hours, Financial Stress, Gender, Sleep Duration, Dietary Habits, Family History of Mental Illness.
 - Method: label encoding, single stratified 80/20 split, default Logistic Regression, Decision Tree (depth 10), Random Forest (depth 15). No tuning, no CV, no calibration.
@@ -41,7 +41,7 @@ Known weaknesses to document (verify each one yourself):
 - The target mixes a current state (depression) with a lifetime item (ever had suicidal thoughts).
 - Label encoding imposed a false order on categories such as Dietary Habits and Sleep Duration.
 - Impurity-based importance is biased toward continuous, high-cardinality features like CGPA and Age.
-- The dataset's provenance, sampling and depression measure are undocumented.
+- The dataset is labelled synthetic on its Kaggle page, with no original data source, sampling method or depression measure given. The course project did not mention this, so its findings cannot be read as evidence about real students.
 
 ## 4. Positioning against existing work
 
@@ -96,7 +96,7 @@ Known issues:
 
 ### 5.3 Original Kaggle dataset
 
-I will add the CSV to `original_course_project/data/` if its Kaggle license allows redistribution. If it isn't there, ask me. Use it only for Aim 4.
+The CSV is at `original_course_project/data/Student Depression Dataset.csv` (Apache 2.0 licence; checksum and shape in `original_course_project/data/MANIFEST.md`). Its Kaggle page labels it synthetically generated, and the course project did not account for this. Use it only for Aim 4, and always describe it as synthetic data.
 
 ### 5.4 Healthy Minds Study (optional, only if I add it)
 
@@ -169,11 +169,14 @@ Design note for now: write the NHANES harmonization and analysis code so the out
 - Compare SHAP rankings across periods.
 
 ### 7.8 Replication scorecard (Aim 4)
-1. **Reproduce** the original notebook's numbers exactly from the Kaggle file. If they don't match, document why.
+Every comparison here is synthetic data versus real survey data. "Holds up" means a pattern in the synthetic data is also seen in NHANES. It does not mean the synthetic data are valid.
+
+1. **Reproduce** the original notebook's numbers exactly from the Kaggle file. If they don't match, document why. This is the baseline for the scorecard (Checkpoint 4).
 2. **Re-evaluate** the original approach properly on the Kaggle data: majority baseline, AUROC, CV, one-hot encoding, permutation importance.
 3. **Map** each original claim to NHANES: testable directly, testable through a proxy (label proxies clearly, for example income-to-poverty ratio or food insecurity for "financial stress"), or not testable (CGPA, academic pressure, family history).
 4. **Score** each testable claim against criteria fixed in `analysis_plan.md` before you look: same direction, CI excludes the null, and effect size comparison. Labels: Holds up / Weaker / Doesn't hold up / Not testable.
 5. Produce `results/tables/replication_scorecard.csv` and a figure.
+6. **Literature audit (bounded).** Find published papers that use this dataset: peer-reviewed papers, plus preprints clearly labelled as preprints. For each, record whether it acknowledges that the data are synthetic. Follow the approach of Gibson et al. (2026, *BMC Medicine*, doi:10.1186/s12916-026-04981-y) where it fits. Fix the search sources, search terms, inclusion rules and stopping rule in `analysis_plan.md` at Checkpoint 3, before the audit runs. Report counts, not judgments about individual authors.
 
 ### 7.9 Canadian replication (Aim 5)
 - Harmonize CCHS variables to the NHANES feature set. Document every mapping, proxy and gap in `docs/harmonization_cchs.md`.

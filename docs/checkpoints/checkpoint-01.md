@@ -8,9 +8,10 @@ Branch: `checkpoint-01-literature`. Date: 2026-11-26.
 2. Wrote `src/download.py`. It reads the CDC listing pages to find exact file names, downloads every file, records checksums and dates in `data/nhanes_manifest.csv`, and checks that every file opens correctly.
 3. Downloaded all 134 files for the 8 cycles and checked each one.
 4. Wrote `tests/test_download.py` (20 tests, all passing, no network needed).
-5. Searched the literature, read the sources, and wrote `reports/related_work.md` (21 references, each marked "full text" or "abstract only", with preprints labelled).
-6. Started `docs/decisions.md` (18 entries so far).
+5. Searched the literature, read the sources, and wrote `reports/related_work.md` (22 references, each marked "full text" or "abstract only", with preprints labelled).
+6. Started `docs/decisions.md` (26 entries so far).
 7. After your review: checked the Research Square preprint, looked for NCHS publications on the interview mode change, and recorded your decisions (see "Update after review" below).
+8. After your Kaggle check: merged `main` (with the CSV), pinned the CSV with a manifest and a test, credited the dataset, and updated `related_work.md` and CLAUDE.md (see "Update after the Kaggle check" below).
 
 ## Key numbers
 
@@ -71,7 +72,7 @@ A file existing in every cycle does not mean its questions are comparable. That 
 
 ## Surprises
 
-1. **The course project's dataset may be synthetic.** Washton et al. (2026, *Frontiers in Medicine*) describe the Kaggle Student Depression Dataset (27,901 records) as synthetic. They say its depression label "was generated algorithmically based on weighted combinations of the predictor variables". Their only source is the Kaggle page. That page loads its content with JavaScript, so I could only read its title, and I have not confirmed this. Your report and proposal do not say the data are synthetic.
+1. **The course project's dataset is synthetic** (confirmed after review, see below). Washton et al. (2026, *Frontiers in Medicine*) describe the Kaggle Student Depression Dataset (27,901 records) as synthetic. They say its depression label "was generated algorithmically based on weighted combinations of the predictor variables". Their only source is the Kaggle page. That page loads its content with JavaScript, so I could only read its title, and I have not confirmed this. Your report and proposal do not say the data are synthetic.
 2. **The depression questions changed mode in 2021-2023.** They were interviewer-administered (CAPI) up to 2017-March 2020 and self-administered (ACASI) in Aug 2021-Aug 2023. Both CDC codebooks, Data Brief 527 and the NCHS plan and operations report (Series 1, No. 66) say so. I found no NCHS analysis of the mode change's effect on PHQ-9 scores. Some of the rise from 8.3% to 13.1% (ages 12 and older, Data Brief 527) may therefore come from the mode change. Our data cannot separate the two, and this directly affects Aim 3. Response rates also fell, from 51.0% and 46.9% (interview and examination) to 34.6% and 25.7% (NCHS brief overview for 2021-2023).
 3. **No medication names in 2021-2023.** `RXQ_RX_L` has only "took any prescription medicine in the past month" (`RXQ033`) and "how many" (`RXQ050`). The CDC codebook says: "The detailed prescription medication name, duration of use, and reason for use were not collected in this survey cycle." Antidepressant use can only be identified in 2005-2016 and 2017-March 2020.
 4. **Some components change between cycles.** C-reactive protein is `CRP` in 2005-2010, missing in 2011-2014, and `HSCRP` from 2015. Blood pressure is manual (`BPX`) through 2015-2016 and oscillometric (`BPXO`) after that. Neither fully meets the "all periods" rule as is. These are Checkpoint 2 decisions.
@@ -98,7 +99,10 @@ A file existing in every cycle does not mean its questions are comparable. That 
 | Revision handling | Unit tests with a changed file | Warns, logs, keeps old checksum, exits with error |
 | Data Brief 527 numbers in CLAUDE.md | Read the brief | 8.2% to 13.1% confirmed, April 2025 |
 | Original project numbers in CLAUDE.md | Text of the report PDF | 71.8%, 77.30%, 80.23%, 90.74%, 85.17% and the five importances all match |
-| Each citation opened | Recorded per reference | 21 cited; 11 full text, 10 abstract only; 2 labelled as preprints |
+| Each citation opened | Recorded per reference | 22 cited; 13 full text, 9 abstract only; 2 labelled as preprints |
+| Kaggle CSV is the expected file | SHA-256, `pandas.read_csv` shape and missing values; `tests/test_original_data.py` | 27,901 rows, 18 columns, 3 missing (all `Financial Stress`), as you expected |
+| Apache 2.0 wording | Compared with https://www.apache.org/licenses/LICENSE-2.0.txt | Section 4(a) quoted correctly in D26 |
+| Tests | `make test` | 22 passed |
 | Citation numbering | Script: every in-text number has a reference, in order of first use | Passes |
 | Writing style | Scan for em dashes | None |
 
@@ -109,7 +113,7 @@ A file existing in every cycle does not mean its questions are comparable. That 
 | # | Question | Decision | Where it goes |
 |---|---|---|---|
 | 1 | Aim 2 overlap | Keep Aim 2: remove `DPQ030` and `DPQ040` from the outcome, for regression and prediction, in young adults, with survey weights. Salimi et al. and Al-Ghadban and Salman are named comparisons. | `related_work.md` section 3; `analysis_plan.md` at Checkpoint 3 |
-| 2 | Kaggle synthetic? | You will check the Kaggle page. CLAUDE.md and Aim 4 stay unchanged for now. | Open |
+| 2 | Kaggle synthetic? | You checked the page: it is labelled synthetic. | Resolved, see below |
 | 3 | Mode change | State that 2021-2023 differences cannot separate real change from the interview mode change. Cite NCHS. | `related_work.md` section 1; `analysis_plan.md` at Checkpoint 3 |
 | 4 | Antidepressant ablation | 2005-2016 and 2017-March 2020 only, because 2021-2023 has no drug names. | `analysis_plan.md` at Checkpoint 3 |
 | 5 | arXiv 2508.09809 | Cited as a preprint, for background only. | `related_work.md` section 5, ref 19 |
@@ -130,9 +134,27 @@ The DOIs, PMIDs and PMCIDs come from the Crossref, PubMed and Europe PMC records
 - **Al-Ghadban and Salman (2026).** Al-Ghadban F, Salman A. Sleep characteristics and mental health among Kuwait University students: sensitivity analyses for item overlap. *Behavioral Sciences (Basel)*. 2026;16:1446. DOI: https://doi.org/10.3390/bs16081446. Open-access copy: PMCID PMC13509799 (https://pmc.ncbi.nlm.nih.gov/articles/PMC13509799/). PMID 42651623.
 - **Malik and En (2026, preprint).** Malik MI, En WQ. Socioeconomic and sleep correlates of a positive depression screen, and the limited added value of laboratory measurement: a design-based analysis of NHANES 2007-2018. Research Square, posted 6 August 2026. DOI: https://doi.org/10.21203/rs.3.rs-10577122/v1. Not peer reviewed.
 
-## Still open
+## Update after the Kaggle check
 
-1. **Is the Kaggle dataset synthetic?** Waiting for you to check https://www.kaggle.com/datasets/hopesb/student-depression-dataset. If it is, Aim 4 and CLAUDE.md Section 3 should describe it that way. I will not change either until you decide.
+You confirmed from the Kaggle page that the dataset "was synthetically generated and may not reflect real-world data" (author Shodolamu Opeyemi, Apache 2.0, "Synthetic" tag, no original source). Logged as D19 to D26.
+
+| Request | What I did |
+|---|---|
+| Merge `main` | Merged with a merge commit. It added only the CSV, with no conflicts (D20). |
+| Manifest | `original_course_project/data/MANIFEST.md`: SHA-256 `a3e159e2...fd35404`, 2,807,716 bytes, 27,901 rows, 18 columns, 3 missing values (all `Financial Stress`). This matches what you expected. A new test checks it on every `make test` (D21). |
+| Credit | `original_course_project/README.md`: two paragraphs naming the author, the Kaggle URL, Apache 2.0 and the Kaggle synthetic statement. Nothing else in that folder changed (D22). |
+| `related_work.md` | Section 5 now cites the Kaggle page (accessed 26 November 2026) next to Washton et al. Gibson et al. is now the named precedent for the audit, with three differences from ours. Section 6 item 4 now says "labelled synthetic". I read Gibson et al. in full for this, so it is now marked full text (D23). |
+| CLAUDE.md | Aim 4 reframed. Section 3 and 5.3 now say the dataset is labelled synthetic and that the course project did not account for it. Section 7.8 has a note on what "Holds up" means and a new step 6 for the bounded paper audit. Checkpoint 4 is unchanged (D24). |
+| Paper audit | Added to Aim 4 in CLAUDE.md (7.8 step 6). Its design waits for `analysis_plan.md` at Checkpoint 3 (D25). |
+
+One assumption: I used 26 November 2026 as the access date for the Kaggle page, the day you told me you checked it. Tell me if it was a different day.
+
+## Still open (small, for you to decide whenever suits)
+
+1. **README table row.** `original_course_project/README.md` still says `data/` holds "The Kaggle CSV, if its license allows redistribution". That is now out of date. Should I change it to say the CSV is there, under Apache 2.0? It's outside the edit you allowed, so I left it.
+2. **Three CLAUDE.md phrases you didn't ask me to change.** Section 1 ("Its data has no documented source, sampling method or validated questionnaire"), Section 4 ("the replication of convenience-data findings") and the Section 9 tree comment ("Kaggle CSV, if its license allows") are now slightly out of step with the new Aim 4. Should I align them?
+3. **Apache 2.0 licence text.** Section 4(a) of the licence asks redistributors to include a copy of the licence. Should I add `original_course_project/data/LICENSE` with the official text? It would be a new file in the protected folder (D26).
+4. **Audit search sources (for Checkpoint 3, not now).** Gibson et al. used Google Scholar, which may block automated searches from here. At Checkpoint 3 I'll propose sources that can be searched from this environment, such as Europe PMC full-text search and Crossref (D25).
 
 ## Next (only after you say "approved")
 

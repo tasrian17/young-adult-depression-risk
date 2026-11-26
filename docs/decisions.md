@@ -55,7 +55,43 @@ Why: the 2021-2023 medication file has no drug names. CDC states that "the detai
 Factor analyses, including one in NHANES, place appetite (item 5, `DPQ050`) in the somatic factor with sleep and tiredness. A pre-registered optional check will drop items 3, 4 and 5 together, on top of the main two-item ablation, not instead of it.
 
 **D17. Aim 4 and CLAUDE.md stay unchanged until the Kaggle page is checked.**
-A peer-reviewed paper describes the Kaggle dataset as synthetic, but I could not confirm this on Kaggle itself. You will check the page. Until then, nothing in CLAUDE.md or Aim 4 changes.
+A peer-reviewed paper describes the Kaggle dataset as synthetic, but I could not confirm this on Kaggle itself. You will check the page. Until then, nothing in CLAUDE.md or Aim 4 changes. *Resolved by D19 to D25.*
 
 **D18. The planning file is not a project file.**
 `you-are-working-on-humming-bee.md` is Claude's own working plan, stored outside the repository (`/root/.claude/plans/`). It was never committed, so there was nothing to remove. A 2024 *Innovation in Aging* conference abstract and Tubbs et al. 2020 appeared in searches, but I could not read the relevant text, so they are not cited.
+
+### Decisions made after the Kaggle page was checked
+
+**D19. The Kaggle dataset is treated as synthetic data.**
+You checked the Kaggle page in a browser. It states: "This dataset was synthetically generated and may not reflect real-world data." It has a "Synthetic" tag and gives no original data source. Author: Shodolamu Opeyemi. Licence: Apache 2.0. From now on every document calls it synthetic data. Comparisons with NHANES are synthetic data versus real survey data, not two samples of people.
+
+**D20. `main` merged into `checkpoint-01-literature`.**
+You added the CSV to `main` (commit `32e7c42`). I merged `main` into the branch with a merge commit and no rebase, so the branch history stays as pushed. The merge added only the CSV, with no conflicts.
+
+**D21. The CSV is pinned by a manifest and a test.**
+`original_course_project/data/MANIFEST.md` records the SHA-256, size, shape (27,901 rows, 18 columns) and missing values (3, all in `Financial Stress`). All of these match what you expected. `tests/test_original_data.py` checks them on every `make test`, so a changed file can't silently change Aim 4 results. The manifest is a new file in `original_course_project/data/`, added because you asked for it.
+
+**D22. `original_course_project/README.md`: credit and synthetic label only.**
+This is the only existing file in `original_course_project/` that I edited, as you allowed. I added two short paragraphs: credit (author, Kaggle URL, Apache 2.0, pointer to the checksum) and the synthetic label. I did not call the copy "unmodified", because I could not compare it with a fresh Kaggle download with the Kaggle quote. Nothing else in that folder changed. The README's table row for `data/` still says "The Kaggle CSV, if its license allows redistribution", which is now out of date. I left it because changing it is outside what you allowed. It is listed as an open question.
+
+**D23. `reports/related_work.md` updated.**
+- Section 5 now cites the Kaggle page (accessed 26 November 2026, read in your browser) alongside Washton et al.
+- Gibson et al. is described as the closest methodological precedent for the paper audit, with how ours differs: mental health, a dataset openly labelled synthetic, preprints counted, and a direct comparison with validated national data.
+- I read Gibson et al. in full to describe their method (Google Scholar, full-text screening, peer-reviewed studies only, nine TRIPOD+AI items), so its reference is now marked full text.
+- Section 6 item 4 now says "labelled synthetic".
+- Washton et al. remain the only source for how the label was built. The Kaggle page does not describe the generation method.
+
+**D24. CLAUDE.md updated, with your go-ahead.**
+- Section 2, Aim 4: reframed as "Synthetic data versus validated data". It keeps the replication scorecard and adds the paper audit.
+- Section 3: the dataset line now gives the author, the licence and the Kaggle synthetic statement, and says the course project did not account for this. The provenance weakness bullet now says the data are labelled synthetic.
+- Section 5.3: it now gives the CSV location and manifest, and says to use the data only for Aim 4 and always describe them as synthetic.
+- Section 7.8: added a note that "Holds up" does not mean the synthetic data are valid, marked step 1 as the Checkpoint 4 baseline, and added step 6 (the bounded literature audit).
+- Checkpoint 4 is unchanged.
+- Not changed, because they were outside what you approved: Section 1 ("Its data has no documented source..."), Section 4 ("replication of convenience-data findings"), and the Section 9 tree comment "(Kaggle CSV, if its license allows)". They are now slightly out of step with Aim 4 and are listed as an open question.
+
+**D25. The paper audit is designed at Checkpoint 3, not now.**
+Search sources, terms, inclusion rules and stopping rule go into `analysis_plan.md` before the audit runs, as you said. One practical point for that design: Gibson et al. searched Google Scholar, which may block automated searches from this environment. Checkpoint 3 should name sources that can be searched here, such as Europe PMC full-text search and Crossref, and say how Google Scholar is handled if it can't be.
+
+**D26. Apache 2.0 notice: flagged, not acted on.**
+Apache License 2.0, section 4(a), says: "You must give any other recipients of the Work or Derivative Works a copy of this License" (checked against https://www.apache.org/licenses/LICENSE-2.0.txt). The repository credits the licence but does not include its text. Adding `original_course_project/data/LICENSE` would be a new file in a folder you protect, so I have not done it. It is listed as an open question.
+
