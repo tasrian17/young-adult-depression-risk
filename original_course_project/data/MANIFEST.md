@@ -10,7 +10,7 @@
 | Missing values | 3, all in `Financial Stress` (no other column has missing values) |
 | Source | Kaggle, https://www.kaggle.com/datasets/hopesb/student-depression-dataset |
 | Author | Shodolamu Opeyemi |
-| Licence | Apache License 2.0 |
+| Licence | Apache License 2.0. Full text in `LICENSE`, copied unchanged from https://www.apache.org/licenses/LICENSE-2.0.txt on 26 November 2026 (SHA-256 `cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30`) |
 | Status on Kaggle | Labelled synthetic: "This dataset was synthetically generated and may not reflect real-world data." Tagged "Synthetic". No original data source given. |
 | Added to this repository | Commit `32e7c42` on `main` |
 

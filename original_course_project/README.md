@@ -13,7 +13,7 @@ This folder is a read-only record of the course project this repository extends.
 | `proposal/TasrianAhmed_EDA_Proposal.ipynb` | Exploratory data analysis submitted with the proposal |
 | `final/TasrianAhmed_Project_Report.pdf` | Final project report |
 | `final/TasrianAhmed_Final_Notebook.ipynb` | Final notebook with the modelling |
-| `data/` | The Kaggle CSV, if its license allows redistribution. Otherwise, download it from the link below and place it here. |
+| `data/` | The Kaggle CSV (synthetic data, Apache License 2.0), its checksum in `MANIFEST.md`, and the licence text in `LICENSE`. |
 
 ## Dataset
 

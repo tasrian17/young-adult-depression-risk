@@ -95,3 +95,25 @@ Search sources, terms, inclusion rules and stopping rule go into `analysis_plan.
 **D26. Apache 2.0 notice: flagged, not acted on.**
 Apache License 2.0, section 4(a), says: "You must give any other recipients of the Work or Derivative Works a copy of this License" (checked against https://www.apache.org/licenses/LICENSE-2.0.txt). The repository credits the licence but does not include its text. Adding `original_course_project/data/LICENSE` would be a new file in a folder you protect, so I have not done it. It is listed as an open question.
 
+### Decisions that close Checkpoint 1
+
+**D27. README table row for `data/` updated.**
+You approved it. The row in `original_course_project/README.md` now says `data/` holds the synthetic Kaggle CSV (Apache License 2.0), its checksum in `MANIFEST.md`, and the licence text in `LICENSE`. This resolves the open point in D22.
+
+**D28. Three CLAUDE.md phrases aligned with the new Aim 4.**
+You approved it.
+- Section 1: "Its data has no documented source..." now says the dataset is labelled synthetic, gives no source, sampling method or validated questionnaire, and that the course project did not account for this.
+- Section 4: "the replication of convenience-data findings" is now "the comparison of patterns in a widely used synthetic dataset with validated national data".
+- Section 9 tree comment: now "(synthetic Kaggle CSV, MANIFEST.md, LICENSE)".
+
+I left the search (b) instruction in Section 4 ("papers that test convenience or Kaggle mental health datasets against validated data") as it was. It records the search that was run, not a description of the dataset.
+
+**D29. Apache 2.0 licence text added as `original_course_project/data/LICENSE`.**
+You approved it. The file is the official text from https://www.apache.org/licenses/LICENSE-2.0.txt, copied unchanged on 26 November 2026. It is 202 lines and 11,358 bytes, SHA-256 `cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30`, and the manifest records this. This meets section 4(a) of the licence (D26).
+
+**D30. Audit search sources: proposed at Checkpoint 3; Google Scholar by hand if needed.**
+At Checkpoint 3 I will propose the search sources for the paper audit. If Google Scholar cannot be reached from this environment, you will run that part of the search by hand. The plan will then give the exact query strings, the date run and what to record, so the manual part is reproducible.
+
+**D31. Kaggle access date confirmed.**
+You confirmed that you checked the Kaggle page on 26 November 2026, the date used in `related_work.md` reference 22 and in the manifest.
+

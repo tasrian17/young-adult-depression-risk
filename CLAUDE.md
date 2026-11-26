@@ -6,7 +6,7 @@ Read this whole file before doing anything. It defines the research question, th
 
 I'm Tasrian Ahmed, a 4th-year BSc Computer Science (Honours) student at UPEI. This is an **independent research project** that extends my CS-4440 Data Science course project (Winter 2026).
 
-The original project predicted "mental health risk" in students using a Kaggle dataset. Its data has no documented source, sampling method or validated questionnaire, so its findings can't be trusted. This project asks the same kind of question with real, validated data, tests which of the original findings hold up, and turns the results into a public tool people can use.
+The original project predicted "mental health risk" in students using a Kaggle dataset. That dataset is labelled synthetic on its Kaggle page and gives no original source, sampling method or validated questionnaire, so its findings can't be read as evidence about real students. The course project did not account for this. This project asks the same kind of question with real, validated data, tests which patterns in the synthetic data match validated national data, and turns the results into a public tool people can use.
 
 The original course work is in `original_course_project/`. **Never modify anything in that folder.** Treat it as a historical record.
 
@@ -45,7 +45,7 @@ Known weaknesses to document (verify each one yourself):
 
 ## 4. Positioning against existing work
 
-NHANES + machine learning + SHAP for depression has been done many times. The contribution here is the young adult focus, the sleep overlap analysis, the over-time comparison, and the replication of convenience-data findings. Starting points (open and verify each before citing; never cite something you haven't read):
+NHANES + machine learning + SHAP for depression has been done many times. The contribution here is the young adult focus, the sleep overlap analysis, the over-time comparison, and the comparison of patterns in a widely used synthetic dataset with validated national data. Starting points (open and verify each before citing; never cite something you haven't read):
 
 - Brody and Hughes (2025), NCHS Data Brief No. 527: depression prevalence rose from 8.2% (2013-2014) to 13.1% (Aug 2021-Aug 2023) in people 12 and older.
 - Vu et al. (2025), "Prediction of depressive disorder using machine learning approaches: findings from the NHANES," BMC Medical Informatics and Decision Making.
@@ -221,7 +221,7 @@ Requirements:
 │   ├── README.md
 │   ├── proposal/
 │   ├── final/
-│   └── data/                    (Kaggle CSV, if its license allows)
+│   └── data/                    (synthetic Kaggle CSV, MANIFEST.md, LICENSE)
 ├── data/
 │   ├── raw/                     (gitignored)
 │   └── processed/

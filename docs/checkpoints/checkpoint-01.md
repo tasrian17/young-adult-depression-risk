@@ -9,7 +9,7 @@ Branch: `checkpoint-01-literature`. Date: 2026-11-26.
 3. Downloaded all 134 files for the 8 cycles and checked each one.
 4. Wrote `tests/test_download.py` (20 tests, all passing, no network needed).
 5. Searched the literature, read the sources, and wrote `reports/related_work.md` (22 references, each marked "full text" or "abstract only", with preprints labelled).
-6. Started `docs/decisions.md` (26 entries so far).
+6. Started `docs/decisions.md` (31 entries so far).
 7. After your review: checked the Research Square preprint, looked for NCHS publications on the interview mode change, and recorded your decisions (see "Update after review" below).
 8. After your Kaggle check: merged `main` (with the CSV), pinned the CSV with a manifest and a test, credited the dataset, and updated `related_work.md` and CLAUDE.md (see "Update after the Kaggle check" below).
 
@@ -149,12 +149,17 @@ You confirmed from the Kaggle page that the dataset "was synthetically generated
 
 One assumption: I used 26 November 2026 as the access date for the Kaggle page, the day you told me you checked it. Tell me if it was a different day.
 
-## Still open (small, for you to decide whenever suits)
+## Closing decisions (D27 to D31)
 
-1. **README table row.** `original_course_project/README.md` still says `data/` holds "The Kaggle CSV, if its license allows redistribution". That is now out of date. Should I change it to say the CSV is there, under Apache 2.0? It's outside the edit you allowed, so I left it.
-2. **Three CLAUDE.md phrases you didn't ask me to change.** Section 1 ("Its data has no documented source, sampling method or validated questionnaire"), Section 4 ("the replication of convenience-data findings") and the Section 9 tree comment ("Kaggle CSV, if its license allows") are now slightly out of step with the new Aim 4. Should I align them?
-3. **Apache 2.0 licence text.** Section 4(a) of the licence asks redistributors to include a copy of the licence. Should I add `original_course_project/data/LICENSE` with the official text? It would be a new file in the protected folder (D26).
-4. **Audit search sources (for Checkpoint 3, not now).** Gibson et al. used Google Scholar, which may block automated searches from here. At Checkpoint 3 I'll propose sources that can be searched from this environment, such as Europe PMC full-text search and Crossref (D25).
+| Point | Decision | Done |
+|---|---|---|
+| README `data/` row | Update it | The row now names the synthetic CSV, `MANIFEST.md` and `LICENSE` |
+| Three CLAUDE.md phrases | Align with Aim 4 | Section 1, Section 4 and the Section 9 tree comment updated |
+| Apache 2.0 text | Add it | `original_course_project/data/LICENSE`, official text from apache.org, SHA-256 in the manifest |
+| Audit search sources | Propose at Checkpoint 3 | You will run any Google Scholar part by hand if it can't be reached from here |
+| Kaggle access date | 26 November 2026 | Confirmed |
+
+**Checkpoint 1 is complete.** Nothing is left open.
 
 ## Next (only after you say "approved")
 
