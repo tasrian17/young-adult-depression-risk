@@ -221,3 +221,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Project data: raw downloads never go into git (CLAUDE.md Section 11).
+data/raw/
+*.part
+*.candidate
+!data/nhanes_revisions.log
